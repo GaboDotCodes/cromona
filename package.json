@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/GABOdotCODES/Cromona",
   "dependencies": {
+    "@sentry/node": "^5.18.0",
     "express": "^4.17.1"
   }
 }
