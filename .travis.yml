@@ -5,7 +5,7 @@ before_install:
 - npm install -g npm
 script:
 - npm install
-- npm run preset
+- npm run start
 deploy:
   provider: heroku
   api_key:
