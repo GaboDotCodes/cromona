@@ -4,7 +4,7 @@
   "description": "Cromona is your perfect companion in the collecting world",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Building tests\" && exit 0",
+    "test": "echo \"Building tests\"",
     "dev": "direnv allow && clear && nodemon -e js,graphql",
     "start": "node server.js"
   },
