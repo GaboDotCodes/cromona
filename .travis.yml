@@ -9,3 +9,7 @@ deploy:
   app: cromona
   on:
     repo: GABOdotCODES/cromona
+branches:
+  only:
+  - master
+  - stable
