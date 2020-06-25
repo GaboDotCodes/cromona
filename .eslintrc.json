@@ -7,6 +7,9 @@
     "parserOptions": {
         "ecmaVersion": 11
     },
+    "extends": ["airbnb", "prettier"],
+    "plugins": ["prettier"],
     "rules": {
+      "prettier/prettier": ["error"]
     }
 }
