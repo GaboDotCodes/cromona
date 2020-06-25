@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- 12.18.1
+  - 12.18.1
 script: 'true'
 deploy:
   provider: heroku
@@ -11,5 +11,4 @@ deploy:
     repo: GABOdotCODES/cromona
 branches:
   only:
-  - master
-  - stable
+    - master
