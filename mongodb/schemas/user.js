@@ -2,6 +2,6 @@ const mongoose = require('mongoose');
 
 const { ObjectId } = mongoose.Schema.Types;
 
-const albumSchema = new mongoose.Schema({});
+const userSchema = new mongoose.Schema({});
 
-mongoose.model('Album', albumSchema);
+mongoose.model('User', userSchema);
