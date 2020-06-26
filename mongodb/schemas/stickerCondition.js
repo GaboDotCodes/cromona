@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const { ObjectId } = mongoose.Schema.Types;
+const { ObjectId } = Schema.Types;
 
 const stickerConditionSchema = new mongoose.Schema({});
 
-mongoose.model('StickerCondition', stickerConditionSchema);
+module.exports = model('StickerCondition', stickerConditionSchema);

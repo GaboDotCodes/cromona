@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const { ObjectId } = mongoose.Schema.Types;
+const { ObjectId } = Schema.Types;
 
-const editorialSchema = new mongoose.Schema({});
+const editorialSchema = new Schema({});
 
-mongoose.model('Editorial', editorialSchema);
+module.exports = model('Editorial', editorialSchema);

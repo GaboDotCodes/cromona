@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const { ObjectId } = mongoose.Schema.Types;
+const { ObjectId } = Schema.Types;
 
-const swapSchema = new mongoose.Schema({});
+const stickerSchema = new mongoose.Schema({});
 
-mongoose.model('Swap', swapSchema);
+module.exports = model('Swap', swapSchema);

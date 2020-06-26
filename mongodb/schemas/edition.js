@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const { ObjectId } = mongoose.Schema.Types;
+const { ObjectId } = Schema.Types;
 
-const editionSchema = new mongoose.Schema({});
+const editionSchema = new Schema({});
 
-mongoose.model('Edition', editionSchema);
+module.exports = model('Edition', editionSchema);

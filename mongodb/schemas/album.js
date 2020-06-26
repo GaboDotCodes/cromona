@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const { ObjectId } = mongoose.Schema.Types;
+const { ObjectId } = Schema.Types;
 
-const albumSchema = new mongoose.Schema({});
+const albumSchema = new Schema({});
 
-mongoose.model('Album', albumSchema);
+module.exports = model('Album', albumSchema);
