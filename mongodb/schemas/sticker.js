@@ -39,7 +39,7 @@ const stickerSchema = new Schema({
       options: [
         {
           type: ObjectId,
-          ref: 'Category',
+          ref: 'StickerCategory',
         },
       ],
     },
