@@ -1,6 +1,7 @@
 const express = require('express');
+const graphqlHTTP = require('express-graphql');
+const { makeExecutableSchema } = require('graphql-tools');
 const sentry = require('@sentry/node');
-const admin = require('firebase-admin');
 
 const { connect } = require('./mongodb/connect');
 
@@ -12,11 +13,34 @@ const app = express();
 sentry.init({ dsn: `${DSN_SENTRY}`, environment: `${ENV_SENTRY}` });
 connect();
 
-admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
+app.use(sentry.Handlers.requestHandler());
+
+const typeDefs = `
+type Query {
+  hello: String
+}
+`;
+
+const resolvers = {
+  Query: {
+    hello: () => {
+      return 'Hello world!';
+    },
+  },
+};
+
+const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers,
 });
 
-app.use(sentry.Handlers.requestHandler());
+app.use(
+  '/graphql',
+  graphqlHTTP({
+    schema,
+    graphiql: true,
+  })
+);
 
 app.use(sentry.Handlers.errorHandler());
 
