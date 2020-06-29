@@ -13,7 +13,7 @@ const stickerSchema = new Schema({
     type: Number,
     require: true,
   },
-  tittle: {
+  title: {
     type: String,
     require: true,
   },
