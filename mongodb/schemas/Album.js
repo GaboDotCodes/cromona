@@ -12,10 +12,17 @@ const albumSchema = new Schema({
     type: String,
     validate: isURL,
   },
-  editions: [
+  launchedAt: {
+    type: Date,
+  },
+  amountStickers: {
+    type: Number,
+    required: true,
+  },
+  stickers: [
     {
       type: ObjectId,
-      ref: 'Edition',
+      ref: 'Sticker',
     },
   ],
 });

@@ -15,18 +15,7 @@ const swapSchema = new Schema({
     {
       state: {
         type: String,
-        enum: [
-          'created',
-          'accepted',
-          'rejected',
-          'changed',
-          'firstChecked',
-          'secondChecked',
-          'confirmed',
-          'openDispute',
-          'closedDispute',
-          'canceled',
-        ],
+        enum: ['created', 'accepted', 'rejected', 'changed'],
         require: true,
       },
       newStateBy: {
@@ -36,26 +25,21 @@ const swapSchema = new Schema({
       changedAt: {
         type: Date,
         require: true,
-      },
-      detail: {
-        colecctionDB: {
-          type: String,
-        },
-        id: {
-          type: ObjectId,
-        },
+        default: Date.now,
       },
     },
   ],
   senderToReceiver: [
     {
       type: ObjectId,
+      ref: 'Sticker',
       require: true,
     },
   ],
   receiverToSender: [
     {
       type: ObjectId,
+      ref: 'Sticker',
       require: true,
     },
   ],
