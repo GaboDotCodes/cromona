@@ -11,26 +11,20 @@ const pointSchema = new Schema({
     type: [Number],
     index: '2dsphere',
   },
-  createdAt: {
+  lastUpdate: {
     type: Date,
     default: Date.now,
   },
 });
 
 const UserSchema = new Schema({
-  username: {
-    type: String,
-    match: [/^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){4,18}[a-zA-Z0-9]$/g, 'No match with RegEx'],
-    unique: true,
-    require: true,
-  },
   uidFirebase: {
     type: String,
     unique: true,
     require: true,
   },
   colections: [
-    {
+    new Schema({
       editionAlbumId: {
         type: ObjectId,
         ref: 'Edition',
@@ -44,6 +38,7 @@ const UserSchema = new Schema({
           categories: [
             {
               type: ObjectId,
+              ref: 'StickerCategory',
             },
           ],
           condition: {
@@ -52,7 +47,7 @@ const UserSchema = new Schema({
           },
         },
       ],
-    },
+    }),
   ],
   ratings: [
     {
