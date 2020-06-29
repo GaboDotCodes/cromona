@@ -50,12 +50,14 @@ const swapSchema = new Schema({
   senderToReceiver: [
     {
       type: ObjectId,
+      ref: 'Sticker',
       require: true,
     },
   ],
   receiverToSender: [
     {
       type: ObjectId,
+      ref: 'Sticker',
       require: true,
     },
   ],
