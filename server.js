@@ -15,19 +15,9 @@ connect();
 
 app.use(sentry.Handlers.requestHandler());
 
-const typeDefs = `
-type Query {
-  hello: String
-}
-`;
+const typeDefs = require('./graphql/typesMerged');
 
-const resolvers = {
-  Query: {
-    hello: () => {
-      return 'Hello world!';
-    },
-  },
-};
+const resolvers = require('./graphql/resolversMerged');
 
 const schema = makeExecutableSchema({
   typeDefs,
@@ -35,7 +25,7 @@ const schema = makeExecutableSchema({
 });
 
 app.use(
-  '/graphql',
+  '/gql',
   graphqlHTTP({
     schema,
     graphiql: true,
