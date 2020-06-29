@@ -7,11 +7,11 @@ const stickerSchema = new Schema({
   album: {
     type: ObjectId,
     ref: 'Edition',
+    require: true,
   },
   number: {
     type: Number,
     require: true,
-    unique: true,
   },
   tittle: {
     type: String,
@@ -19,7 +19,6 @@ const stickerSchema = new Schema({
   },
   image: {
     type: String,
-    require: true,
     validate: isURL,
   },
   compatibleWith: [
