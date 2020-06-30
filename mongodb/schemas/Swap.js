@@ -29,6 +29,10 @@ const swapSchema = new Schema({
       },
     },
   ],
+  album: {
+    type: ObjectId,
+    ref: 'Album',
+  },
   senderToReceiver: [
     {
       type: ObjectId,
