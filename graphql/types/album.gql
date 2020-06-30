@@ -1,0 +1,9 @@
+type Album {
+  id: ID!
+  title: String
+  image: String
+  launchedAt: Int
+  stickers: [Sticker]
+  users: [User]
+  swaps: [Swap]
+}

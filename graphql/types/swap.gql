@@ -1,0 +1,14 @@
+type State {
+  state: String
+  newStateBy: User
+  changedAt: Int
+}
+
+type Swap {
+  sentBy: User
+  receivedBy: User
+  states: [State]
+  album: Album
+  senderToReceiver: [Sticker]
+  receiverToSender: [Sticker]
+}

@@ -3,17 +3,17 @@ const { Schema, model } = require('mongoose');
 const { ObjectId } = Schema.Types;
 
 const colectionSchema = new Schema({
-  userId: {
+  user: {
     type: ObjectId,
     ref: 'User',
   },
-  albumId: {
+  album: {
     type: ObjectId,
     ref: 'Album',
   },
   stickersColection: [
     {
-      stickerId: {
+      sticker: {
         type: ObjectId,
         ref: 'Sticker',
       },

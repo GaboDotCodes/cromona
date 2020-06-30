@@ -1,0 +1,6 @@
+type Sticker {
+  album: Album
+  number: Int
+  title: String
+  image: String
+}

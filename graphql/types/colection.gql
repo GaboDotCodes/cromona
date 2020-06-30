@@ -1,0 +1,11 @@
+type stickerColectionDetail {
+  sticker: Sticker
+  amount: Int
+}
+
+type Colection {
+  id: ID!
+  user: User
+  album: Album
+  stickersColection: [stickerColectionDetail]
+}

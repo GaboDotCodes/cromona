@@ -1,0 +1,8 @@
+type User {
+  uid: String
+  albums: [Album]
+  colections: [Colection]
+  ratings: [Rating]
+  swaps: [Swap]
+  distance: Int
+}

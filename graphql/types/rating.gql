@@ -1,0 +1,8 @@
+type Rating {
+  swap: Swap
+  to: User
+  by: User
+  coherence: Int
+  punctuality: Int
+  feedback: String
+}

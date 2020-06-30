@@ -1,0 +1,5 @@
+type Interest {
+  by: User
+  to: User
+  at: Int
+}
