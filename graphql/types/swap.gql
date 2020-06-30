@@ -1,5 +1,12 @@
+enum StateDetail {
+  created
+  accepted
+  rejected
+  changed
+}
+
 type State {
-  state: String
+  state: StateDetail
   newStateBy: User
   changedAt: Int
 }
