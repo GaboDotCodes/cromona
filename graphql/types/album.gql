@@ -14,6 +14,9 @@ input AlbumInput {
   launchedAt: Float
   amountStickers: Int
 }
+type Query {
+  getAllAlbums: [Album]
+}
 type Mutation {
   # Add album to database
   addAlbum(album: AlbumInput): Album
