@@ -3,4 +3,5 @@ type Sticker {
   number: Int
   title: String
   image: String
+  users: [User]
 }
