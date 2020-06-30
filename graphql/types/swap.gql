@@ -8,7 +8,7 @@ enum StateDetail {
 type State {
   state: StateDetail
   newStateBy: User
-  changedAt: Int
+  changedAt: Float
 }
 
 type Swap {
