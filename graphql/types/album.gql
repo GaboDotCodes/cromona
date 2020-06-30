@@ -2,8 +2,19 @@ type Album {
   id: ID!
   title: String
   image: String
-  launchedAt: Int
+  launchedAt: Float
+  amountStickers: Int
   stickers: [Sticker]
   users: [User]
   swaps: [Swap]
+}
+input AlbumInput {
+  title: String
+  image: String
+  launchedAt: Float
+  amountStickers: Int
+}
+type Mutation {
+  # Add album to database
+  addAlbum(album: AlbumInput): Album
 }
