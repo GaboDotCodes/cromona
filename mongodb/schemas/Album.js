@@ -25,6 +25,18 @@ const albumSchema = new Schema({
       ref: 'Sticker',
     },
   ],
+  users: [
+    {
+      type: ObjectId,
+      ref: 'User',
+    },
+  ],
+  swaps: [
+    {
+      type: ObjectId,
+      ref: 'Swap',
+    },
+  ],
 });
 
 module.exports = model('Album', albumSchema);
