@@ -1,4 +1,5 @@
 type User {
+  id: ID
   uid: String
   albums: [Album] #ToCoding
   collections: [Collection] #ToCoding
