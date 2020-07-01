@@ -8,19 +8,13 @@ const userSchema = new Schema({
     unique: true,
     require: true,
   },
-  albums: [
-    {
-      type: ObjectId,
-      ref: 'Album',
-    },
-  ],
   colections: [
     {
       type: ObjectId,
       ref: 'Colection',
     },
   ],
-  ratings: [
+  ratingsToMe: [
     {
       type: ObjectId,
       ref: 'Rating',
