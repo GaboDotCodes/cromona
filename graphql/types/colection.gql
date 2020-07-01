@@ -5,7 +5,7 @@ type stickerCollectionDetail {
 
 type Collection {
   id: ID!
-  album: Album #ToCoding
+  album: Album
   stickersCollection: [stickerCollectionDetail]
   canHelpYou: [User] #ToCoding
 }
