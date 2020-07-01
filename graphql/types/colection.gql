@@ -5,8 +5,16 @@ type stickerCollectionDetail {
 
 type Collection {
   id: ID!
-  user: User #ToCoding
   album: Album #ToCoding
   stickersCollection: [stickerCollectionDetail]
   canHelpYou: [User] #ToCoding
+}
+
+input CollectionInput {
+  user: ID
+  album: ID
+}
+
+type Mutation {
+  addCollection(collection: CollectionInput): Collection
 }
