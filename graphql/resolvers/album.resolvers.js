@@ -4,6 +4,7 @@ const getAllAlbums = require('./functions/getAllAlbums');
 const getStickersByAlbumId = require('./functions/getStickersByAlbumId');
 const searchAlbum = require('./functions/searchAlbum');
 const getAlbumById = require('./functions/getAlbumById');
+const countAlbumsStickers = require('./functions/countAlbumsStickers');
 
 module.exports = {
   Mutation: {
@@ -51,6 +52,15 @@ module.exports = {
       try {
         const stickersReturn = await getStickersByAlbumId(id);
         return stickersReturn;
+      } catch (e) {
+        error(e);
+        return e;
+      }
+    },
+    async amountStickers({ id }) {
+      try {
+        const stickersCountedReturn = await countAlbumsStickers(id);
+        return stickersCountedReturn;
       } catch (e) {
         error(e);
         return e;
