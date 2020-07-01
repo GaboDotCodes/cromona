@@ -1,5 +1,5 @@
 type Sticker {
-  album: Album #ToCoding
+  album: Album
   number: Int
   title: String
   image: String
