@@ -3,10 +3,12 @@ const { Schema, model } = require('mongoose');
 const { ObjectId } = Schema.Types;
 
 const ratingSchema = new Schema({
-  swap: {
-    type: ObjectId,
-    ref: 'Swap',
-  },
+  swaps: [
+    {
+      type: ObjectId,
+      ref: 'Swap',
+    },
+  ],
   to: {
     type: ObjectId,
     ref: 'User',
