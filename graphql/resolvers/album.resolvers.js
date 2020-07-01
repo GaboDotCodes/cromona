@@ -47,9 +47,9 @@ module.exports = {
     },
   },
   Album: {
-    async stickers(album) {
+    async stickers({ id }) {
       try {
-        const stickersReturn = await getStickersByAlbumId(album.id);
+        const stickersReturn = await getStickersByAlbumId(id);
         return stickersReturn;
       } catch (e) {
         error(e);
