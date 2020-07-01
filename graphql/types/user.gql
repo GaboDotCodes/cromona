@@ -1,10 +1,10 @@
 type User {
   uid: String
-  albums: [Album]
-  colections: [Colection]
-  ratings: [Rating]
-  swaps: [Swap]
-  distance: Int
+  albums: [Album] #ToCoding
+  colections: [Colection] #ToCoding
+  ratings: [Rating] #ToCoding
+  swaps: [Swap] #ToCoding
+  distance: Int #ToCoding
 }
 input UserInput {
   uid: String

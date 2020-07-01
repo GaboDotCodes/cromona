@@ -1,11 +1,12 @@
 type stickerColectionDetail {
-  sticker: Sticker
+  sticker: Sticker #ToCoding
   amount: Int
 }
 
 type Colection {
   id: ID!
-  user: User
-  album: Album
+  user: User #ToCoding
+  album: Album #ToCoding
   stickersColection: [stickerColectionDetail]
+  canHelpYou: [User] #ToCoding
 }

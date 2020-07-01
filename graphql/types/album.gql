@@ -3,10 +3,10 @@ type Album {
   title: String
   image: String
   launchedAt: Float
-  amountStickers: Int
+  amountStickers: Int #ToCoding
   stickers: [Sticker]
-  users: [User]
-  swaps: [Swap]
+  users: [User] #ToCoding
+  swaps: [Swap] #ToCoding
 }
 input AlbumInput {
   title: String

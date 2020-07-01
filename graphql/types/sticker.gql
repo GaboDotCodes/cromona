@@ -1,9 +1,9 @@
 type Sticker {
-  album: Album
+  album: Album #ToCoding
   number: Int
   title: String
   image: String
-  users: [User]
+  haveRepeated: [User] #ToCoding
 }
 input StickerInput {
   album: ID

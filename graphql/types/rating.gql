@@ -1,7 +1,7 @@
 type Rating {
-  swap: Swap
-  to: User
-  by: User
+  swaps: [Swap] #ToCoding
+  to: User #ToCoding
+  by: User #ToCoding
   coherence: Int
   punctuality: Int
   feedback: String

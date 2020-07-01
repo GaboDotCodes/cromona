@@ -7,15 +7,15 @@ enum StateDetail {
 
 type State {
   state: StateDetail
-  newStateBy: User
+  changedBy: User #ToCoding
   changedAt: Float
 }
 
 type Swap {
-  sentBy: User
-  receivedBy: User
+  sentBy: User #ToCoding
+  receivedBy: User #ToCoding
   states: [State]
-  album: Album
-  senderToReceiver: [Sticker]
-  receiverToSender: [Sticker]
+  album: Album #ToCoding
+  senderToReceiver: [Sticker] #ToCoding
+  receiverToSender: [Sticker] #ToCoding
 }
