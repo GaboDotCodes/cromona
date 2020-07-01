@@ -1,7 +1,7 @@
 type User {
   uid: String
   albums: [Album] #ToCoding
-  colections: [Colection] #ToCoding
+  collections: [Collection] #ToCoding
   ratings: [Rating] #ToCoding
   swaps: [Swap] #ToCoding
   distance: Int #ToCoding
