@@ -6,3 +6,9 @@ type User {
   swaps: [Swap]
   distance: Int
 }
+input UserInput {
+  uid: String
+}
+type Mutation {
+  addUser(user: UserInput): User
+}
