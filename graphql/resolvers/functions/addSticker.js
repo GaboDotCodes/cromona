@@ -1,7 +1,7 @@
 const Sticker = require('../../../mongodb/schemas/Sticker');
 
-const addSticker = async ({ album, number, title, image }) => {
-  const stickerToSave = new Sticker({ album, number, title, image });
+const addSticker = async (sticker) => {
+  const stickerToSave = new Sticker(sticker);
   const stickerSaved = await stickerToSave.save();
   return stickerSaved;
 };
