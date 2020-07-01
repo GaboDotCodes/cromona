@@ -18,13 +18,13 @@ const swapSchema = new Schema({
         enum: ['created', 'accepted', 'rejected', 'changed'],
         require: true,
       },
-      newStateBy: {
+      changedBy: {
         type: ObjectId,
         ref: 'User',
+        require: true,
       },
       changedAt: {
         type: Date,
-        require: true,
         default: Date.now,
       },
     },
