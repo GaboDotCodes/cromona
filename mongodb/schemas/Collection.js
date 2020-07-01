@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const { ObjectId } = Schema.Types;
 
-const colectionSchema = new Schema({
+const collectionSchema = new Schema({
   user: {
     type: ObjectId,
     ref: 'User',
@@ -11,7 +11,7 @@ const colectionSchema = new Schema({
     type: ObjectId,
     ref: 'Album',
   },
-  stickersColection: [
+  stickersCollection: [
     {
       sticker: {
         type: ObjectId,
@@ -24,4 +24,4 @@ const colectionSchema = new Schema({
   ],
 });
 
-module.exports = model('Colection', colectionSchema);
+module.exports = model('Collection', collectionSchema);

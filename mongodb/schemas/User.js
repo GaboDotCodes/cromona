@@ -8,10 +8,10 @@ const userSchema = new Schema({
     unique: true,
     require: true,
   },
-  colections: [
+  collections: [
     {
       type: ObjectId,
-      ref: 'Colection',
+      ref: 'Collection',
     },
   ],
   ratingsToMe: [
