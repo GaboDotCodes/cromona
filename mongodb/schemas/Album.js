@@ -15,26 +15,10 @@ const albumSchema = new Schema({
   launchedAt: {
     type: Date,
   },
-  amountStickers: {
-    type: Number,
-    required: true,
-  },
   stickers: [
     {
       type: ObjectId,
       ref: 'Sticker',
-    },
-  ],
-  users: [
-    {
-      type: ObjectId,
-      ref: 'User',
-    },
-  ],
-  swaps: [
-    {
-      type: ObjectId,
-      ref: 'Swap',
     },
   ],
 });
