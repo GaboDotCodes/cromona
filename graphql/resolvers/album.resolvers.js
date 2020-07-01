@@ -1,7 +1,8 @@
 const { error } = console;
 const addAlbum = require('./functions/addAlbum');
 const getAllAlbums = require('./functions/getAllAlbums');
-const getStickerByAlbumIb = require('./functions/getStickersByAlbumId');
+const getStickerByAlbumId = require('./functions/getStickersByAlbumId');
+const searchAlbum = require('./functions/searchAlbum');
 
 module.exports = {
   Mutation: {
@@ -25,11 +26,20 @@ module.exports = {
         return e;
       }
     },
+    searchAlbum: async (_, { searchTerm }) => {
+      try {
+        const albumsReturn = await searchAlbum(searchTerm);
+        return albumsReturn;
+      } catch (e) {
+        error(e);
+        return e;
+      }
+    },
   },
   Album: {
     async stickers(album) {
       try {
-        const stickersReturn = await getStickerByAlbumIb(album.id);
+        const stickersReturn = await getStickerByAlbumId(album.id);
         return stickersReturn;
       } catch (e) {
         error(e);
