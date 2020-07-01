@@ -16,6 +16,7 @@ input AlbumInput {
 }
 type Query {
   getAllAlbums: [Album]
+  searchAlbum(searchTerm: String): [Album]
 }
 type Mutation {
   # Add album to database
