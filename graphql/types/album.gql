@@ -5,7 +5,7 @@ type Album {
   launchedAt: Float
   amountStickers: Int
   stickers: [Sticker]
-  users: [User] #ToCoding
+  users: [User]
 }
 input AlbumInput {
   title: String
