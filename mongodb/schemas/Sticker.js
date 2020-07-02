@@ -6,14 +6,14 @@ const { ObjectId } = Schema.Types;
 const stickerSchema = new Schema({
   album: {
     type: ObjectId,
-    ref: 'Edition',
+    ref: 'Album',
     require: true,
   },
   number: {
     type: Number,
     require: true,
   },
-  tittle: {
+  title: {
     type: String,
     require: true,
   },
@@ -21,28 +21,6 @@ const stickerSchema = new Schema({
     type: String,
     validate: isURL,
   },
-  compatibleWith: [
-    {
-      type: ObjectId,
-      ref: 'Sticker',
-    },
-  ],
-  categories: [
-    {
-      title: {
-        type: String,
-      },
-      optional: {
-        type: Boolean,
-      },
-      options: [
-        {
-          type: ObjectId,
-          ref: 'StickerCategory',
-        },
-      ],
-    },
-  ],
 });
 
 module.exports = model('Sticker', stickerSchema);

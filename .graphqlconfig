@@ -1,0 +1,8 @@
+{
+  "projects":{
+    "app":{
+      "schemaPath": "graphql/types/*.gql",
+      "includes": ["graphql/types/*.gql"]
+      }
+    }
+}
