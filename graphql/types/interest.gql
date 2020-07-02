@@ -3,3 +3,12 @@ type Interest {
   to: User #ToCoding
   at: Float
 }
+
+input InterestInput {
+  by: ID
+  to: ID
+}
+
+type Mutation {
+  addInterest(interest: InterestInput): Interest
+}
