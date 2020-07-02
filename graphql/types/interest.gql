@@ -1,6 +1,6 @@
 type Interest {
-  by: User #ToCoding
-  to: User #ToCoding
+  by: User
+  to: User
   at: Float
 }
 
