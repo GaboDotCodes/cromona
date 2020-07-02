@@ -1,5 +1,6 @@
 const { error } = console;
 const addUser = require('./functions/addUser');
+const getUserById = require('./functions/getUserById');
 
 module.exports = {
   Mutation: {
@@ -7,6 +8,17 @@ module.exports = {
       try {
         const userSaved = await addUser(user);
         return userSaved;
+      } catch (e) {
+        error(e);
+        return e;
+      }
+    },
+  },
+  Query: {
+    getUserById: async (_, { user }) => {
+      try {
+        const userReturn = await getUserById(user);
+        return userReturn;
       } catch (e) {
         error(e);
         return e;
