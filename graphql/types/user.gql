@@ -2,9 +2,9 @@ type User {
   id: ID
   uid: String
   albums: [Album] #ToCoding
-  collections: [Collection] #ToCoding
-  ratings: [Rating] #ToCoding
-  swaps: [Swap] #ToCoding
+  collections: [Collection]
+  ratings: [Rating]
+  swaps: [Swap]
   distance: Int #ToCoding
 }
 
