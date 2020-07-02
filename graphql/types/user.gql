@@ -1,0 +1,21 @@
+type User {
+  id: ID
+  uid: String
+  albums: [Album] #ToCoding
+  collections: [Collection]
+  ratings: [Rating]
+  swaps: [Swap]
+  distance: Int #ToCoding
+}
+
+input UserInput {
+  uid: String
+}
+
+type Query {
+  getUserById(user: ID): User
+}
+
+type Mutation {
+  addUser(user: UserInput): User
+}

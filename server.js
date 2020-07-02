@@ -1,4 +1,6 @@
 const express = require('express');
+const graphqlHTTP = require('express-graphql');
+const { makeExecutableSchema } = require('graphql-tools');
 const sentry = require('@sentry/node');
 
 const { connect } = require('./mongodb/connect');
@@ -12,6 +14,23 @@ sentry.init({ dsn: `${DSN_SENTRY}`, environment: `${ENV_SENTRY}` });
 connect();
 
 app.use(sentry.Handlers.requestHandler());
+
+const typeDefs = require('./graphql/typesMerged');
+
+const resolvers = require('./graphql/resolversMerged');
+
+const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers,
+});
+
+app.use(
+  '/gql',
+  graphqlHTTP({
+    schema,
+    graphiql: true,
+  })
+);
 
 app.use(sentry.Handlers.errorHandler());
 
