@@ -1,5 +1,5 @@
 type stickerCollectionDetail {
-  sticker: Sticker #ToCoding
+  sticker: Sticker
   amount: Int
 }
 
