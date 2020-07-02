@@ -1,0 +1,21 @@
+enum StateDetail {
+  created
+  accepted
+  rejected
+  changed
+}
+
+type State {
+  state: StateDetail
+  changedBy: User #ToCoding
+  changedAt: Float
+}
+
+type Swap {
+  sentBy: User #ToCoding
+  receivedBy: User #ToCoding
+  states: [State]
+  album: Album #ToCoding
+  senderToReceiver: [Sticker] #ToCoding
+  receiverToSender: [Sticker] #ToCoding
+}

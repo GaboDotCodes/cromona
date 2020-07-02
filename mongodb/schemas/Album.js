@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const { isURL } = require('validator');
 
 const { ObjectId } = Schema.Types;
 
@@ -7,10 +8,17 @@ const albumSchema = new Schema({
     type: String,
     required: true,
   },
-  editions: [
+  image: {
+    type: String,
+    validate: isURL,
+  },
+  launchedAt: {
+    type: Date,
+  },
+  stickers: [
     {
       type: ObjectId,
-      ref: 'Edition',
+      ref: 'Sticker',
     },
   ],
 });
