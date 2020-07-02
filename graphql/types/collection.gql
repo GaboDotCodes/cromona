@@ -1,0 +1,20 @@
+type stickerCollectionDetail {
+  sticker: Sticker
+  amount: Int
+}
+
+type Collection {
+  id: ID!
+  album: Album
+  stickersCollection: [stickerCollectionDetail]
+  canHelpYou: [User] #ToCoding
+}
+
+input CollectionInput {
+  user: ID
+  album: ID
+}
+
+type Mutation {
+  addCollection(collection: CollectionInput): Collection
+}

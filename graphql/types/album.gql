@@ -1,0 +1,24 @@
+type Album {
+  id: ID!
+  title: String
+  image: String
+  launchedAt: Float
+  amountStickers: Int
+  stickers: [Sticker]
+  users: [User]
+}
+input AlbumInput {
+  title: String
+  image: String
+  launchedAt: Float
+  amountStickers: Int
+}
+type Query {
+  getAllAlbums: [Album]
+  searchAlbum(searchTerm: String): [Album]
+  getAlbumById(album: ID): Album
+}
+type Mutation {
+  # Add album to database
+  addAlbum(album: AlbumInput): Album
+}

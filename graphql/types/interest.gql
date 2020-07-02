@@ -1,0 +1,14 @@
+type Interest {
+  by: User
+  to: User
+  at: Float
+}
+
+input InterestInput {
+  by: ID
+  to: ID
+}
+
+type Mutation {
+  addInterest(interest: InterestInput): Interest
+}
