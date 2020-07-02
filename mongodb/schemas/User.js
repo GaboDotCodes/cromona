@@ -14,7 +14,7 @@ const userSchema = new Schema({
       ref: 'Collection',
     },
   ],
-  ratingsToMe: [
+  ratings: [
     {
       type: ObjectId,
       ref: 'Rating',
