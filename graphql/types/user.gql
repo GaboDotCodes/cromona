@@ -7,9 +7,15 @@ type User {
   swaps: [Swap] #ToCoding
   distance: Int #ToCoding
 }
+
 input UserInput {
   uid: String
 }
+
+type Query {
+  getUserById(user: ID): User
+}
+
 type Mutation {
   addUser(user: UserInput): User
 }
