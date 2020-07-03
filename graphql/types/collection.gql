@@ -15,6 +15,12 @@ input CollectionInput {
   album: ID
 }
 
+input addStickerToCollectionData {
+  sticker: ID
+  collection: ID
+}
+
 type Mutation {
   addCollection(collection: CollectionInput): Collection
+  addStickerToCollection(operationDetail: addStickerToCollectionData): stickerCollectionDetail
 }
