@@ -26,6 +26,15 @@ module.exports = {
         return e;
       }
     },
+    removeStickerToCollection: async (_, { operationDetail }) => {
+      try {
+        const stickerDetailReturn = await addStickerToCollection(operationDetail, -1);
+        return stickerDetailReturn;
+      } catch (e) {
+        error(e);
+        return e;
+      }
+    },
   },
   Collection: {
     async album({ album }) {
