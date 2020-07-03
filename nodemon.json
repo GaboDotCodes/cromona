@@ -1,5 +1,6 @@
 {
   "events": {
-    "restart": "direnv allow && clear"
+    "restart": "direnv allow && clear",
+    "start": "direnv allow && clear"
   }
 }
