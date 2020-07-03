@@ -23,4 +23,5 @@ input addStickerToCollectionData {
 type Mutation {
   addCollection(collection: CollectionInput): Collection
   addStickerToCollection(operationDetail: addStickerToCollectionData): stickerCollectionDetail
+  removeStickerToCollection(operationDetail: addStickerToCollectionData): stickerCollectionDetail
 }
