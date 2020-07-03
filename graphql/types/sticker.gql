@@ -1,4 +1,5 @@
 type Sticker {
+  id: ID
   album: Album
   number: Int
   title: String
