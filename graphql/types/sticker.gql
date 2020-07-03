@@ -6,12 +6,14 @@ type Sticker {
   image: String
   haveRepeated: [User] #ToCoding
 }
+
 input StickerInput {
   album: ID
   number: Int
   title: String
   image: String
 }
+
 type Mutation {
   addSticker(sticker: StickerInput): Sticker
 }
