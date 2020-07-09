@@ -1,4 +1,5 @@
 const { error } = console;
+const verifyIdTokenAndAdmin = require('./functions/verifyIdTokenAndAdmin');
 const addAlbum = require('./functions/addAlbum');
 const getAllAlbums = require('./functions/getAllAlbums');
 const getStickersByAlbumId = require('./functions/getStickersByAlbumId');
@@ -9,8 +10,10 @@ const getUsersByAlbumId = require('./functions/getUsersByAlbumId');
 
 module.exports = {
   Mutation: {
-    addAlbum: async (_, { album }) => {
+    addAlbum: async (_, { album }, context) => {
       try {
+        const { authorization } = context.headers;
+        await verifyIdTokenAndAdmin(authorization);
         const albumReturn = await addAlbum(album);
         return albumReturn;
       } catch (e) {
