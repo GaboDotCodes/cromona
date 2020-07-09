@@ -25,7 +25,7 @@ type Mutation {
   addAlbum(album: AlbumInput): Album
   addCollection(collection: CollectionInput): Collection
   addStickerToCollection(operationDetail: addStickerToCollectionData): stickerCollectionDetail
-  removeStickerToCollection(operationDetail: addStickerToCollectionData): stickerCollectionDetail
+  removeStickerFromCollection(operationDetail: addStickerToCollectionData): stickerCollectionDetail
   addInterest(interest: InterestInput): Interest
   addSticker(sticker: StickerInput): Sticker
   addUser(user: UserInput): User
