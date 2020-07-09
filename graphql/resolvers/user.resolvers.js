@@ -4,6 +4,7 @@ const getUserById = require('./functions/getUserById');
 const getCollectionsByUserId = require('./functions/getCollectionsByUserId');
 const getRatingsByUserId = require('./functions/getRatingsByUserId');
 const getSwapsByUserId = require('./functions/getSwapsByUserId');
+const verifyIdToken = require('./functions/verifyIdToken');
 
 module.exports = {
   Mutation: {
@@ -18,8 +19,10 @@ module.exports = {
     },
   },
   Query: {
-    getUserById: async (_, { user }) => {
+    getUserById: async (_, { user }, context) => {
       try {
+        const { authorization } = context.headers;
+        await verifyIdToken(authorization);
         const userReturn = await getUserById(user);
         return userReturn;
       } catch (e) {
