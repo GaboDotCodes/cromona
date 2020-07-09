@@ -26,7 +26,7 @@ module.exports = {
         return e;
       }
     },
-    removeStickerToCollection: async (_, { operationDetail }) => {
+    removeStickerFromCollection: async (_, { operationDetail }) => {
       try {
         const stickerDetailReturn = await addStickerToCollection(operationDetail, -1);
         return stickerDetailReturn;
