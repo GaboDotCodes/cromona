@@ -24,8 +24,8 @@ type Query {
 type Mutation {
   addAlbum(album: AlbumInput): Album
   addCollection(collection: CollectionInput): Collection
-  addStickerToCollection(operationDetail: addStickerToCollectionData): stickerCollectionDetail
-  removeStickerFromCollection(operationDetail: addStickerToCollectionData): stickerCollectionDetail
+  addStickerToCollection(operationDetail: modifyStickerInCollectionData): stickerCollectionDetail
+  removeStickerFromCollection(operationDetail: modifyStickerInCollectionData): stickerCollectionDetail
   addInterest(interest: InterestInput): Interest
   addSticker(sticker: StickerInput): Sticker
   addUser(user: UserInput): User
@@ -48,7 +48,7 @@ input CollectionInput {
   album: ID
 }
 
-input addStickerToCollectionData {
+input modifyStickerInCollectionData {
   sticker: ID
   collection: ID
   user: ID
