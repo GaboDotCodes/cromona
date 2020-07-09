@@ -4,7 +4,7 @@ const addCollection = require('./functions/addCollection');
 const addCollectionToUser = require('./functions/addCollectionToUser');
 const getAlbumById = require('./functions/getAlbumById');
 const getCollectionWithStickers = require('./functions/getCollectionWithStickers');
-const addStickerToCollection = require('./functions/addStickerToCollection');
+const modifyStickerInCollection = require('./functions/modifyStickerInCollection');
 
 module.exports = {
   Mutation: {
@@ -20,11 +20,11 @@ module.exports = {
         return e;
       }
     },
-    addStickerToCollection: async (_, { operationDetail }, context) => {
+    modifyStickerInCollection: async (_, { operationDetail }, context) => {
       try {
         const { authorization } = context.headers;
         await verifyMatchUserIdAndToken(operationDetail.user, authorization);
-        const stickerDetailReturn = await addStickerToCollection(operationDetail);
+        const stickerDetailReturn = await modifyStickerInCollection(operationDetail);
         return stickerDetailReturn;
       } catch (e) {
         error(e);
@@ -35,7 +35,7 @@ module.exports = {
       try {
         const { authorization } = context.headers;
         await verifyMatchUserIdAndToken(operationDetail.user, authorization);
-        const stickerDetailReturn = await addStickerToCollection(operationDetail, -1);
+        const stickerDetailReturn = await modifyStickerInCollection(operationDetail, -1);
         return stickerDetailReturn;
       } catch (e) {
         error(e);
