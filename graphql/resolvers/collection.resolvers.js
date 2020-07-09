@@ -20,8 +20,10 @@ module.exports = {
         return e;
       }
     },
-    addStickerToCollection: async (_, { operationDetail }) => {
+    addStickerToCollection: async (_, { operationDetail }, context) => {
       try {
+        const { authorization } = context.headers;
+        await verifyMatchUserIdAndToken(operationDetail.user, authorization);
         const stickerDetailReturn = await addStickerToCollection(operationDetail);
         return stickerDetailReturn;
       } catch (e) {
@@ -29,8 +31,10 @@ module.exports = {
         return e;
       }
     },
-    removeStickerFromCollection: async (_, { operationDetail }) => {
+    removeStickerFromCollection: async (_, { operationDetail }, context) => {
       try {
+        const { authorization } = context.headers;
+        await verifyMatchUserIdAndToken(operationDetail.user, authorization);
         const stickerDetailReturn = await addStickerToCollection(operationDetail, -1);
         return stickerDetailReturn;
       } catch (e) {
