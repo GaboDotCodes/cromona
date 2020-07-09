@@ -1,6 +1,6 @@
 const Collection = require('../../../mongodb/schemas/Collection');
 
-const addStickerToCollection = async (operationDetail, operation = 1) => {
+const modifyStickerInCollection = async (operationDetail, operation = 1) => {
   const { sticker, collection } = operationDetail;
   const collectionUpdated = await Collection.findOneAndUpdate(
     { _id: collection, 'stickersCollection.sticker': sticker },
@@ -12,4 +12,4 @@ const addStickerToCollection = async (operationDetail, operation = 1) => {
   return stickerDetailReturn;
 };
 
-module.exports = addStickerToCollection;
+module.exports = modifyStickerInCollection;
