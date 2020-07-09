@@ -1,4 +1,5 @@
 const { error } = console;
+const verifyMatchUserIdAndToken = require('./functions/verifyMatchUserIdAndToken');
 const addCollection = require('./functions/addCollection');
 const addCollectionToUser = require('./functions/addCollectionToUser');
 const getAlbumById = require('./functions/getAlbumById');
@@ -7,8 +8,10 @@ const addStickerToCollection = require('./functions/addStickerToCollection');
 
 module.exports = {
   Mutation: {
-    addCollection: async (_, { collection }) => {
+    addCollection: async (_, { collection }, context) => {
       try {
+        const { authorization } = context.headers;
+        await verifyMatchUserIdAndToken(collection.user, authorization);
         const collectionReturn = await addCollection(collection);
         await addCollectionToUser(collectionReturn.user, collectionReturn.id);
         return collectionReturn;
