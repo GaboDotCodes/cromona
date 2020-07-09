@@ -8,8 +8,13 @@ const verifyIdToken = require('./functions/verifyIdToken');
 
 module.exports = {
   Mutation: {
-    addUser: async (_, { user }) => {
+    addUser: async (_, { user }, context) => {
       try {
+        const { authorization } = context.headers;
+        const { uid } = await verifyIdToken(authorization);
+        if (uid !== user.uid) {
+          throw new Error(`userId and token's uid don't match`);
+        }
         const userSaved = await addUser(user);
         return userSaved;
       } catch (e) {
