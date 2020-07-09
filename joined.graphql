@@ -12,7 +12,6 @@ input AlbumInput {
   title: String
   image: String
   launchedAt: Float
-  amountStickers: Int
 }
 
 type Query {
