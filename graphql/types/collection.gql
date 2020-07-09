@@ -15,7 +15,7 @@ input CollectionInput {
   album: ID
 }
 
-input addStickerToCollectionData {
+input modifyStickerInCollectionData {
   sticker: ID
   collection: ID
   user: ID
@@ -23,6 +23,8 @@ input addStickerToCollectionData {
 
 type Mutation {
   addCollection(collection: CollectionInput): Collection
-  addStickerToCollection(operationDetail: addStickerToCollectionData): stickerCollectionDetail
-  removeStickerFromCollection(operationDetail: addStickerToCollectionData): stickerCollectionDetail
+  addStickerToCollection(operationDetail: modifyStickerInCollectionData): stickerCollectionDetail
+  removeStickerFromCollection(
+    operationDetail: modifyStickerInCollectionData
+  ): stickerCollectionDetail
 }
