@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Building tests\"",
-    "dev": "nodemon -e js,graphql,gql",
+    "dev": "nodemon -e js,gql",
     "start": "node server.js"
   },
   "repository": {
