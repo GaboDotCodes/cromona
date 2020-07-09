@@ -20,7 +20,7 @@ module.exports = {
         return e;
       }
     },
-    modifyStickerInCollection: async (_, { operationDetail }, context) => {
+    addStickerToCollection: async (_, { operationDetail }, context) => {
       try {
         const { authorization } = context.headers;
         await verifyMatchUserIdAndToken(operationDetail.user, authorization);
