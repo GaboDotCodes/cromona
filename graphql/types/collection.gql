@@ -18,6 +18,7 @@ input CollectionInput {
 input addStickerToCollectionData {
   sticker: ID
   collection: ID
+  user: ID
 }
 
 type Mutation {
