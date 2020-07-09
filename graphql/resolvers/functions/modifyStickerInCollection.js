@@ -1,9 +1,9 @@
 const Collection = require('../../../mongodb/schemas/Collection');
 
 const modifyStickerInCollection = async (operationDetail, operation = 1) => {
-  const { sticker, collection } = operationDetail;
+  const { sticker, collection, user } = operationDetail;
   const collectionUpdated = await Collection.findOneAndUpdate(
-    { _id: collection, 'stickersCollection.sticker': sticker },
+    { _id: collection, user, 'stickersCollection.sticker': sticker },
     { $inc: { 'stickersCollection.$.amount': operation } },
     { new: true, useFindAndModify: true }
   ).populate('stickersCollection.sticker');
