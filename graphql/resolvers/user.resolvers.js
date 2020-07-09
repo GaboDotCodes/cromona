@@ -1,10 +1,10 @@
 const { error } = console;
+const verifyIdToken = require('./functions/verifyIdToken');
 const addUser = require('./functions/addUser');
 const getUserById = require('./functions/getUserById');
 const getCollectionsByUserId = require('./functions/getCollectionsByUserId');
 const getRatingsByUserId = require('./functions/getRatingsByUserId');
 const getSwapsByUserId = require('./functions/getSwapsByUserId');
-const verifyIdToken = require('./functions/verifyIdToken');
 
 module.exports = {
   Mutation: {
