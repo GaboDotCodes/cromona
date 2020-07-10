@@ -12,6 +12,7 @@ input AlbumInput {
   title: String
   image: String
   launchedAt: Float
+  approvedBy: ID
 }
 
 type Query {
