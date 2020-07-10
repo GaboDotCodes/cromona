@@ -9,6 +9,8 @@ const getAlbumById = require('./functions/getAlbumById');
 const countAlbumsStickers = require('./functions/countAlbumsStickers');
 const getUsersByAlbumId = require('./functions/getUsersByAlbumId');
 const addAlbumToReview = require('./functions/addAlbumToReview');
+const addStickersToAlbumToReview = require('./functions/addStickersToAlbumToReview');
+const addCollection = require('./functions/addCollection');
 
 module.exports = {
   Mutation: {
@@ -27,8 +29,15 @@ module.exports = {
     addAlbumToReview: async (_, { album }, context) => {
       try {
         const { authorization } = context.headers;
+        const { startSticker, finishSticker } = album;
         await verifyMatchUserIdAndToken(album.reviewRequestedBy, authorization);
         const albumToReviewReturn = await addAlbumToReview(album);
+        await addStickersToAlbumToReview(startSticker, finishSticker, albumToReviewReturn.id);
+        const collection = {
+          user: album.reviewRequestedBy,
+          album: albumToReviewReturn.id,
+        };
+        addCollection(collection);
         return albumToReviewReturn;
       } catch (e) {
         error(e);
