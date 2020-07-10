@@ -1,4 +1,5 @@
 const { error } = console;
+const verifyIdToken = require('./functions/verifyIdToken');
 const addUser = require('./functions/addUser');
 const getUserById = require('./functions/getUserById');
 const getCollectionsByUserId = require('./functions/getCollectionsByUserId');
@@ -7,8 +8,13 @@ const getSwapsByUserId = require('./functions/getSwapsByUserId');
 
 module.exports = {
   Mutation: {
-    addUser: async (_, { user }) => {
+    addUser: async (_, { user }, context) => {
       try {
+        const { authorization } = context.headers;
+        const { uid } = await verifyIdToken(authorization);
+        if (uid !== user.uid) {
+          throw new Error(`userId and token's uid don't match`);
+        }
         const userSaved = await addUser(user);
         return userSaved;
       } catch (e) {
@@ -18,8 +24,10 @@ module.exports = {
     },
   },
   Query: {
-    getUserById: async (_, { user }) => {
+    getUserById: async (_, { user }, context) => {
       try {
+        const { authorization } = context.headers;
+        await verifyIdToken(authorization);
         const userReturn = await getUserById(user);
         return userReturn;
       } catch (e) {

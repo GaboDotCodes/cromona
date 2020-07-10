@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Building tests\"",
-    "dev": "direnv allow && clear && nodemon -e js,graphql,gql",
+    "dev": "nodemon -e js,gql --exec 'clear && node server.js'",
     "start": "node server.js"
   },
   "repository": {

@@ -1,12 +1,15 @@
 const { error } = console;
+const verifyIdTokenAndAdmin = require('./functions/verifyIdTokenAndAdmin');
 const addSticker = require('./functions/addSticker');
 const addStickerToAlbum = require('./functions/addStickerToAlbum');
 const getAlbumById = require('./functions/getAlbumById');
 
 module.exports = {
   Mutation: {
-    addSticker: async (_, { sticker }) => {
+    addSticker: async (_, { sticker }, context) => {
       try {
+        const { authorization } = context.headers;
+        await verifyIdTokenAndAdmin(authorization);
         const stickerReturn = await addSticker(sticker);
         await addStickerToAlbum(stickerReturn.album, stickerReturn.id);
         return stickerReturn;
