@@ -1,5 +1,4 @@
 const Album = require('../../../mongodb/schemas/Album');
-// const _ = require('lodash');
 
 const addAlbumToReview = async (album) => {
   const { title, image, reviewRequestedBy } = album;
