@@ -15,6 +15,14 @@ input AlbumInput {
   approvedBy: ID
 }
 
+input AlbumToReviewInput {
+  title: String
+  image: String
+  startSticker: Int
+  finishSticker: Int
+  reviewRequestedBy: ID
+}
+
 type Query {
   getAllAlbums: [Album]
   searchAlbum(searchTerm: String): [Album]
@@ -24,6 +32,7 @@ type Query {
 
 type Mutation {
   addAlbum(album: AlbumInput): Album
+  addAlbumToReview(album: AlbumToReviewInput): Album
   addCollection(collection: CollectionInput): Collection
   addStickerToCollection(operationDetail: modifyStickerInCollectionData): stickerCollectionDetail
   removeStickerFromCollection(operationDetail: modifyStickerInCollectionData): stickerCollectionDetail
