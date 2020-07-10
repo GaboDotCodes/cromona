@@ -1,0 +1,131 @@
+type Album {
+  id: ID!
+  title: String
+  image: String
+  launchedAt: Float
+  amountStickers: Int
+  stickers: [Sticker]
+  users: [User]
+}
+
+input AlbumInput {
+  title: String
+  image: String
+  launchedAt: Float
+}
+
+type Query {
+  getAllAlbums: [Album]
+  searchAlbum(searchTerm: String): [Album]
+  getAlbumById(album: ID): Album
+  getUserById(user: ID): User
+}
+
+type Mutation {
+  addAlbum(album: AlbumInput): Album
+  addCollection(collection: CollectionInput): Collection
+  addStickerToCollection(operationDetail: modifyStickerInCollectionData): stickerCollectionDetail
+  removeStickerFromCollection(operationDetail: modifyStickerInCollectionData): stickerCollectionDetail
+  addInterest(interest: InterestInput): Interest
+  addSticker(sticker: StickerInput): Sticker
+  addUser(user: UserInput): User
+}
+
+type stickerCollectionDetail {
+  sticker: Sticker
+  amount: Int
+}
+
+type Collection {
+  id: ID!
+  album: Album
+  stickersCollection: [stickerCollectionDetail]
+  canHelpYou: [User]
+}
+
+input CollectionInput {
+  user: ID
+  album: ID
+}
+
+input modifyStickerInCollectionData {
+  sticker: ID
+  collection: ID
+  user: ID
+}
+
+type Interest {
+  by: User
+  to: User
+  at: Float
+}
+
+input InterestInput {
+  by: ID
+  to: ID
+}
+
+type Rating {
+  swaps: [Swap]
+  to: User
+  by: User
+  coherence: Int
+  punctuality: Int
+  feedback: String
+}
+
+type Sticker {
+  id: ID
+  album: Album
+  number: Int
+  title: String
+  image: String
+  haveRepeated: [User]
+}
+
+input StickerInput {
+  album: ID
+  number: Int
+  title: String
+  image: String
+}
+
+enum StateDetail {
+  created
+  accepted
+  rejected
+  changed
+}
+
+type State {
+  state: StateDetail
+  changedBy: User
+  changedAt: Float
+}
+
+type Swap {
+  sentBy: User
+  receivedBy: User
+  states: [State]
+  album: Album
+  senderToReceiver: [Sticker]
+  receiverToSender: [Sticker]
+}
+
+type User {
+  id: ID
+  uid: String
+  collections: [Collection]
+  ratings: [Rating]
+  swaps: [Swap]
+  distance: Int
+}
+
+input UserInput {
+  uid: String
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}
