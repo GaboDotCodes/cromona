@@ -21,6 +21,20 @@ const albumSchema = new Schema({
       ref: 'Sticker',
     },
   ],
+  review: {
+    toReview: {
+      type: Boolean,
+      default: false,
+    },
+    reviewRequestedBy: {
+      type: ObjectId,
+      ref: 'User',
+    },
+  },
+  approvedBy: {
+    type: ObjectId,
+    ref: 'User',
+  },
 });
 
 module.exports = model('Album', albumSchema);
