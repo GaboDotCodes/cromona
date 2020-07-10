@@ -1,5 +1,6 @@
 const { error } = console;
 const verifyIdTokenAndAdmin = require('./functions/verifyIdTokenAndAdmin');
+const verifyMatchUserIdAndToken = require('./functions/verifyMatchUserIdAndToken');
 const addAlbum = require('./functions/addAlbum');
 const getAllAlbums = require('./functions/getAllAlbums');
 const getStickersByAlbumId = require('./functions/getStickersByAlbumId');
@@ -14,6 +15,7 @@ module.exports = {
       try {
         const { authorization } = context.headers;
         await verifyIdTokenAndAdmin(authorization);
+        await verifyMatchUserIdAndToken(album.approvedBy, authorization);
         const albumReturn = await addAlbum(album);
         return albumReturn;
       } catch (e) {
