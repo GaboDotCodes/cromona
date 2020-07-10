@@ -11,6 +11,7 @@ const getUsersByAlbumId = require('./functions/getUsersByAlbumId');
 const addAlbumToReview = require('./functions/addAlbumToReview');
 const addStickersToAlbumToReview = require('./functions/addStickersToAlbumToReview');
 const addCollection = require('./functions/addCollection');
+const addCollectionToUser = require('./functions/addCollectionToUser');
 
 module.exports = {
   Mutation: {
@@ -37,7 +38,8 @@ module.exports = {
           user: album.reviewRequestedBy,
           album: albumToReviewReturn.id,
         };
-        addCollection(collection);
+        const collectionSaved = await addCollection(collection);
+        await addCollectionToUser(album.reviewRequestedBy, collectionSaved.id);
         return albumToReviewReturn;
       } catch (e) {
         error(e);
