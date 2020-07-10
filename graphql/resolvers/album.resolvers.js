@@ -1,5 +1,6 @@
 const { error } = console;
 const verifyIdTokenAndAdmin = require('./functions/verifyIdTokenAndAdmin');
+const verifyMatchUserIdAndToken = require('./functions/verifyMatchUserIdAndToken');
 const addAlbum = require('./functions/addAlbum');
 const getAllAlbums = require('./functions/getAllAlbums');
 const getStickersByAlbumId = require('./functions/getStickersByAlbumId');
@@ -7,6 +8,10 @@ const searchAlbum = require('./functions/searchAlbum');
 const getAlbumById = require('./functions/getAlbumById');
 const countAlbumsStickers = require('./functions/countAlbumsStickers');
 const getUsersByAlbumId = require('./functions/getUsersByAlbumId');
+const addAlbumToReview = require('./functions/addAlbumToReview');
+const addStickersToAlbumToReview = require('./functions/addStickersToAlbumToReview');
+const addCollection = require('./functions/addCollection');
+const addCollectionToUser = require('./functions/addCollectionToUser');
 
 module.exports = {
   Mutation: {
@@ -14,8 +19,28 @@ module.exports = {
       try {
         const { authorization } = context.headers;
         await verifyIdTokenAndAdmin(authorization);
+        await verifyMatchUserIdAndToken(album.approvedBy, authorization);
         const albumReturn = await addAlbum(album);
         return albumReturn;
+      } catch (e) {
+        error(e);
+        return e;
+      }
+    },
+    addAlbumToReview: async (_, { album }, context) => {
+      try {
+        const { authorization } = context.headers;
+        const { startSticker, finishSticker } = album;
+        await verifyMatchUserIdAndToken(album.reviewRequestedBy, authorization);
+        const albumToReviewReturn = await addAlbumToReview(album);
+        await addStickersToAlbumToReview(startSticker, finishSticker, albumToReviewReturn.id);
+        const collection = {
+          user: album.reviewRequestedBy,
+          album: albumToReviewReturn.id,
+        };
+        const collectionSaved = await addCollection(collection);
+        await addCollectionToUser(album.reviewRequestedBy, collectionSaved.id);
+        return albumToReviewReturn;
       } catch (e) {
         error(e);
         return e;
