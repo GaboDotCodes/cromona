@@ -136,7 +136,7 @@ type User {
   id: ID
   uid: ID
   collections: [Collection]
-  albums: [Album]
+  albumsFilling: String
   ratings: [Rating]
   swaps: [Swap]
   distance: Int
