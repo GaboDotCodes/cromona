@@ -2,7 +2,8 @@ type User {
   id: ID
   uid: ID #Protect
   collections: [Collection] #Protect
-  albums: [Album] #ToCoding
+  # albums: [Album] #ToCoding #BackLog
+  albumsFilling: String
   ratings: [Rating]
   swaps: [Swap] #Protect
   distance: Int #ToCoding
