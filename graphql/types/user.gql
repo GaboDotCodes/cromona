@@ -2,9 +2,16 @@ type User {
   id: ID
   uid: String
   collections: [Collection]
+  albums: [Album] #ToCoding
   ratings: [Rating]
   swaps: [Swap]
   distance: Int #ToCoding
+  displayName: String #ToCoding
+  profilePicture: String #ToCoding
+  score: Float #ToCoding
+  swapsWithMe: [Swap] #ToCoding
+  stickersUsefulToMe: [Sticker] #ToCoding
+  amountPosibleSwaps: Int #ToCoding
 }
 
 input UserInput {
