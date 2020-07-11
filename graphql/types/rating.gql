@@ -4,5 +4,7 @@ type Rating {
   by: User #ToCoding
   coherence: Int
   punctuality: Int
+  score: Float
   feedback: String
+  at: Float
 }
