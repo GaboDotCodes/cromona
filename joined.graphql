@@ -6,6 +6,7 @@ type Album {
   amountStickers: Int
   stickers: [Sticker]
   users: [User]
+  amountFinishedSwaps: Int
 }
 
 input AlbumInput {
@@ -81,7 +82,9 @@ type Rating {
   by: User
   coherence: Int
   punctuality: Int
+  score: Float
   feedback: String
+  at: Float
 }
 
 type Sticker {
@@ -126,9 +129,16 @@ type User {
   id: ID
   uid: String
   collections: [Collection]
+  albums: [Album]
   ratings: [Rating]
   swaps: [Swap]
   distance: Int
+  displayName: String
+  profilePicture: String
+  score: Float
+  swapsWithMe: [Swap]
+  stickersUsefulToMe: [Sticker]
+  amountPosibleSwaps: Int
 }
 
 input UserInput {
