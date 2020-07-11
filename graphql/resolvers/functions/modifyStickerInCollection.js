@@ -14,7 +14,7 @@ const modifyStickerInCollection = async (operationDetail, operation = 1) => {
     { new: true, useFindAndModify: true }
   ).populate('stickersCollection.sticker');
   const { stickersCollection } = collectionUpdated;
-  const stickerDetailReturn = stickersCollection.find(async (detail) => detail.sticker === sticker);
+  const stickerDetailReturn = stickersCollection.find((detail) => detail.sticker === sticker);
   return stickerDetailReturn;
 };
 
