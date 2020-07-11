@@ -7,6 +7,7 @@ const getCollectionsByUserId = require('./functions/getCollectionsByUserId');
 const getRatingsByUserId = require('./functions/getRatingsByUserId');
 const getSwapsByUserId = require('./functions/getSwapsByUserId');
 const getDisplayName = require('./functions/getDisplayName');
+const getProfilePicture = require('./functions/getProfilePicture');
 
 module.exports = {
   Mutation: {
@@ -74,6 +75,15 @@ module.exports = {
       try {
         const displayName = await getDisplayName(uid);
         return displayName;
+      } catch (e) {
+        error(e);
+        return e;
+      }
+    },
+    async profilePicture({ uid }) {
+      try {
+        const profilePicture = await getProfilePicture(uid);
+        return profilePicture;
       } catch (e) {
         error(e);
         return e;
