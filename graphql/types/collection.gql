@@ -36,4 +36,5 @@ type Mutation {
 
 type Query {
   getCollectionById(queryData: getCollectionByIdInput): Collection
+  getCollectionsByUserId(userId: ID): [Collection]
 }
