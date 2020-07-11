@@ -30,6 +30,10 @@ const albumSchema = new Schema({
       type: ObjectId,
       ref: 'User',
     },
+    requestAt: {
+      type: Date,
+      default: Date.now,
+    },
   },
   approvedBy: {
     type: ObjectId,
