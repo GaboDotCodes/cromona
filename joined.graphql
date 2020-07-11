@@ -28,6 +28,7 @@ type Query {
   getAllAlbums: [Album]
   searchAlbum(searchTerm: String): [Album]
   getAlbumById(album: ID): Album
+  getAllAlbumsToReview: [Album]
   getCollectionById(queryData: getCollectionByIdInput): Collection
   getCollectionsByUserId(userId: ID): [Collection]
   getUserById(user: ID): User
