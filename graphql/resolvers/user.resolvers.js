@@ -6,6 +6,7 @@ const getUserById = require('./functions/getUserById');
 const getCollectionsByUserId = require('./functions/getCollectionsByUserId');
 const getRatingsByUserId = require('./functions/getRatingsByUserId');
 const getSwapsByUserId = require('./functions/getSwapsByUserId');
+const getDisplayName = require('./functions/getDisplayName');
 
 module.exports = {
   Mutation: {
@@ -64,6 +65,15 @@ module.exports = {
         await verifyMatchUserIdAndToken(id, authorization);
         const SwapsReturn = await getSwapsByUserId(id);
         return SwapsReturn;
+      } catch (e) {
+        error(e);
+        return e;
+      }
+    },
+    async displayName({ uid }) {
+      try {
+        const displayName = await getDisplayName(uid);
+        return displayName;
       } catch (e) {
         error(e);
         return e;
