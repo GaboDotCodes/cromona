@@ -7,8 +7,8 @@ type User {
   ratings: [Rating]
   swaps: [Swap] #Protect
   distance: Int #ToCoding
-  displayName: String #ToCoding
-  profilePicture: String #ToCoding
+  displayName: String
+  profilePicture: String
   score: Float #ToCoding
   swapsWithMe: [Swap] #ToCoding #WithToken
   stickersUsefulToMe: [Sticker] #ToCoding #WithToken
