@@ -28,12 +28,13 @@ type Query {
   getAllAlbums: [Album]
   searchAlbum(searchTerm: String): [Album]
   getAlbumById(album: ID): Album
+  getCollectionById(queryData: getCollectionByIdInput): Collection
   getUserById(user: ID): User
 }
 
 type Mutation {
   addAlbum(album: AlbumInput): Album
-  addAlbumToReview(album: AlbumToReviewInput): Album
+  addAlbumToReview(album: AlbumToReviewInput): Collection
   addCollection(collection: CollectionInput): Collection
   addStickerToCollection(operationDetail: modifyStickerInCollectionData): stickerCollectionDetail
   removeStickerFromCollection(operationDetail: modifyStickerInCollectionData): stickerCollectionDetail
@@ -61,6 +62,11 @@ input CollectionInput {
 
 input modifyStickerInCollectionData {
   sticker: ID
+  collection: ID
+  user: ID
+}
+
+input getCollectionByIdInput {
   collection: ID
   user: ID
 }
@@ -127,7 +133,7 @@ type Swap {
 
 type User {
   id: ID
-  uid: String
+  uid: ID
   collections: [Collection]
   albums: [Album]
   ratings: [Rating]
