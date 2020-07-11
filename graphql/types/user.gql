@@ -1,11 +1,11 @@
 type User {
   id: ID
   uid: ID
-  collections: [Collection] #Protect
+  collections: [Collection]
   # albums: [Album] #ToCoding #BackLog
   albumsFilling: String
   ratings: [Rating]
-  swaps: [Swap] #Protect
+  swaps: [Swap]
   distance: Int #ToCoding
   displayName: String
   profilePicture: String
