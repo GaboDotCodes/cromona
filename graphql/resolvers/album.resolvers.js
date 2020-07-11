@@ -12,6 +12,7 @@ const addAlbumToReview = require('./functions/addAlbumToReview');
 const addStickersToAlbumToReview = require('./functions/addStickersToAlbumToReview');
 const addCollection = require('./functions/addCollection');
 const addCollectionToUser = require('./functions/addCollectionToUser');
+const getAllAlbumsToReview = require('./functions/getAllAlbumsToReview');
 
 module.exports = {
   Mutation: {
@@ -70,6 +71,17 @@ module.exports = {
       try {
         const albumReturn = await getAlbumById(album);
         return albumReturn;
+      } catch (e) {
+        error(e);
+        return e;
+      }
+    },
+    getAllAlbumsToReview: async (_, __, context) => {
+      try {
+        const { authorization } = context.headers;
+        await verifyIdTokenAndAdmin(authorization);
+        const albumsToReviewReturn = await getAllAlbumsToReview();
+        return albumsToReviewReturn;
       } catch (e) {
         error(e);
         return e;
