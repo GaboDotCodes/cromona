@@ -40,7 +40,7 @@ module.exports = {
         };
         const collectionSaved = await addCollection(collection);
         await addCollectionToUser(album.reviewRequestedBy, collectionSaved.id);
-        return albumToReviewReturn;
+        return collectionSaved;
       } catch (e) {
         error(e);
         return e;

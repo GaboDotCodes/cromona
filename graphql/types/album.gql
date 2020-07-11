@@ -33,5 +33,5 @@ type Query {
 type Mutation {
   # Add album to database
   addAlbum(album: AlbumInput): Album
-  addAlbumToReview(album: AlbumToReviewInput): Album # Return Collection?????
+  addAlbumToReview(album: AlbumToReviewInput): Collection
 }
