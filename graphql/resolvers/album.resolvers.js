@@ -30,9 +30,9 @@ module.exports = {
     addAlbumToReview: async (_, { album }, context) => {
       try {
         const { authorization } = context.headers;
-        const { startSticker, finishSticker } = album;
         await verifyMatchUserIdAndToken(album.reviewRequestedBy, authorization);
         const albumToReviewReturn = await addAlbumToReview(album);
+        const { startSticker, finishSticker } = album;
         await addStickersToAlbumToReview(startSticker, finishSticker, albumToReviewReturn.id);
         const collection = {
           user: album.reviewRequestedBy,
