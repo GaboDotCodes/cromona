@@ -1,5 +1,6 @@
 const { error } = console;
 const verifyIdToken = require('./functions/verifyIdToken');
+const verifyMatchUserIdAndToken = require('./functions/verifyMatchUserIdAndToken');
 const addUser = require('./functions/addUser');
 const getUserById = require('./functions/getUserById');
 const getCollectionsByUserId = require('./functions/getCollectionsByUserId');
@@ -37,8 +38,10 @@ module.exports = {
     },
   },
   User: {
-    async collections({ id }) {
+    async collections({ id }, _, context) {
       try {
+        const { authorization } = context.headers;
+        await verifyMatchUserIdAndToken(id, authorization);
         const collectionsReturn = await getCollectionsByUserId(id);
         return collectionsReturn;
       } catch (e) {
@@ -55,8 +58,10 @@ module.exports = {
         return e;
       }
     },
-    async swaps({ id }) {
+    async swaps({ id }, _, context) {
       try {
+        const { authorization } = context.headers;
+        await verifyMatchUserIdAndToken(id, authorization);
         const SwapsReturn = await getSwapsByUserId(id);
         return SwapsReturn;
       } catch (e) {
