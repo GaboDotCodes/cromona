@@ -27,10 +27,25 @@ const ratingSchema = new Schema({
     min: 0,
     max: 5,
   },
+  score: {
+    type: Number,
+    min: 0,
+    max: 5,
+  },
   feedback: {
     type: String,
     maxlength: 300,
   },
+  at: {
+    type: Date,
+    default: Date.now,
+  },
 });
+
+function preSaveRatingSchema() {
+  this.score = (this.coherence + this.punctuality) / 2;
+}
+
+ratingSchema.pre('save', preSaveRatingSchema);
 
 module.exports = model('Rating', ratingSchema);
