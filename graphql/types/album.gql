@@ -6,6 +6,7 @@ type Album {
   amountStickers: Int
   stickers: [Sticker]
   users: [User]
+  amountFinishedSwaps: Int #ToCoding
 }
 
 input AlbumInput {
