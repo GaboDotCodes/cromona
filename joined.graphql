@@ -29,6 +29,7 @@ type Query {
   searchAlbum(searchTerm: String): [Album]
   getAlbumById(album: ID): Album
   getCollectionById(queryData: getCollectionByIdInput): Collection
+  getCollectionsByUserId(userId: ID): [Collection]
   getUserById(user: ID): User
 }
 
