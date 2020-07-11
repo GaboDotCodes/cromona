@@ -1,6 +1,6 @@
 type User {
   id: ID
-  uid: ID #Protect
+  uid: ID
   collections: [Collection] #Protect
   # albums: [Album] #ToCoding #BackLog
   albumsFilling: String
