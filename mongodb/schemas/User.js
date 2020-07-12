@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const pointSchema = require('./pointSchema');
 
 const { ObjectId } = Schema.Types;
 
@@ -27,17 +28,11 @@ const userSchema = new Schema({
     },
   ],
   lastLocation: {
-    type: {
-      type: String,
-      enum: ['Point'],
-    },
-    coordinates: {
-      type: [Number],
-      index: '2dsphere',
-    },
-    lastUpdate: {
-      type: Date,
-    },
+    type: pointSchema,
+    index: '2dsphere',
+  },
+  lastLocationUpdate: {
+    type: Date,
   },
 });
 
