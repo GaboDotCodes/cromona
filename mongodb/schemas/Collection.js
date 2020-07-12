@@ -22,6 +22,10 @@ const collectionSchema = new Schema({
       },
     },
   ],
+  at: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = model('Collection', collectionSchema);

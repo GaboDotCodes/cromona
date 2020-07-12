@@ -21,10 +21,20 @@ input modifyStickerInCollectionData {
   user: ID
 }
 
+input getCollectionByIdInput {
+  collection: ID
+  user: ID
+}
+
 type Mutation {
   addCollection(collection: CollectionInput): Collection
   addStickerToCollection(operationDetail: modifyStickerInCollectionData): stickerCollectionDetail
   removeStickerFromCollection(
     operationDetail: modifyStickerInCollectionData
   ): stickerCollectionDetail
+}
+
+type Query {
+  getCollectionById(queryData: getCollectionByIdInput): Collection
+  getCollectionsByUserId(userId: ID): [Collection]
 }

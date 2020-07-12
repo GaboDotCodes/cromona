@@ -5,6 +5,8 @@ const addCollectionToUser = require('./functions/addCollectionToUser');
 const getAlbumById = require('./functions/getAlbumById');
 const getCollectionWithStickers = require('./functions/getCollectionWithStickers');
 const modifyStickerInCollection = require('./functions/modifyStickerInCollection');
+const getCollectionById = require('./functions/getCollectionById');
+const getCollectionsByUserId = require('./functions/getCollectionsByUserId');
 
 module.exports = {
   Mutation: {
@@ -37,6 +39,30 @@ module.exports = {
         await verifyMatchUserIdAndToken(operationDetail.user, authorization);
         const stickerDetailReturn = await modifyStickerInCollection(operationDetail, -1);
         return stickerDetailReturn;
+      } catch (e) {
+        error(e);
+        return e;
+      }
+    },
+  },
+  Query: {
+    getCollectionById: async (_, { queryData }, context) => {
+      try {
+        const { authorization } = context.headers;
+        await verifyMatchUserIdAndToken(queryData.user, authorization);
+        const collectionReturn = await getCollectionById(queryData.collection);
+        return collectionReturn;
+      } catch (e) {
+        error(e);
+        return e;
+      }
+    },
+    getCollectionsByUserId: async (_, { userId }, context) => {
+      try {
+        const { authorization } = context.headers;
+        await verifyMatchUserIdAndToken(userId, authorization);
+        const collectionsReturn = await getCollectionsByUserId(userId);
+        return collectionsReturn;
       } catch (e) {
         error(e);
         return e;

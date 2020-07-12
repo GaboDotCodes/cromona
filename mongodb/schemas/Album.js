@@ -30,11 +30,18 @@ const albumSchema = new Schema({
       type: ObjectId,
       ref: 'User',
     },
+    requestAt: {
+      type: Date,
+    },
   },
   approvedBy: {
     type: ObjectId,
     ref: 'User',
   },
+});
+
+albumSchema.pre('save', () => {
+  this.review.requestAt = this.review.toReview ? Date.now() : null;
 });
 
 module.exports = model('Album', albumSchema);
