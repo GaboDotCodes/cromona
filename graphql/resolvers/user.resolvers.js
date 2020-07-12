@@ -1,10 +1,13 @@
 const { error } = console;
 const verifyIdToken = require('./functions/verifyIdToken');
+const verifyMatchUserIdAndToken = require('./functions/verifyMatchUserIdAndToken');
 const addUser = require('./functions/addUser');
 const getUserById = require('./functions/getUserById');
 const getCollectionsByUserId = require('./functions/getCollectionsByUserId');
 const getRatingsByUserId = require('./functions/getRatingsByUserId');
 const getSwapsByUserId = require('./functions/getSwapsByUserId');
+const getDisplayName = require('./functions/getDisplayName');
+const getProfilePicture = require('./functions/getProfilePicture');
 
 module.exports = {
   Mutation: {
@@ -37,8 +40,10 @@ module.exports = {
     },
   },
   User: {
-    async collections({ id }) {
+    async collections({ id }, _, context) {
       try {
+        const { authorization } = context.headers;
+        await verifyMatchUserIdAndToken(id, authorization);
         const collectionsReturn = await getCollectionsByUserId(id);
         return collectionsReturn;
       } catch (e) {
@@ -55,10 +60,30 @@ module.exports = {
         return e;
       }
     },
-    async swaps({ id }) {
+    async swaps({ id }, _, context) {
       try {
+        const { authorization } = context.headers;
+        await verifyMatchUserIdAndToken(id, authorization);
         const SwapsReturn = await getSwapsByUserId(id);
         return SwapsReturn;
+      } catch (e) {
+        error(e);
+        return e;
+      }
+    },
+    async displayName({ uid }) {
+      try {
+        const displayName = await getDisplayName(uid);
+        return displayName;
+      } catch (e) {
+        error(e);
+        return e;
+      }
+    },
+    async profilePicture({ uid }) {
+      try {
+        const profilePicture = await getProfilePicture(uid);
+        return profilePicture;
       } catch (e) {
         error(e);
         return e;

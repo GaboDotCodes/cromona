@@ -21,6 +21,10 @@ const stickerSchema = new Schema({
     type: String,
     validate: isURL,
   },
+  approvedBy: {
+    type: ObjectId,
+    ref: 'User',
+  },
 });
 
 module.exports = model('Sticker', stickerSchema);

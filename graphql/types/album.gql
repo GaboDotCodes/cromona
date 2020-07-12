@@ -6,6 +6,7 @@ type Album {
   amountStickers: Int
   stickers: [Sticker]
   users: [User]
+  amountFinishedSwaps: Int #ToCoding
 }
 
 input AlbumInput {
@@ -27,10 +28,11 @@ type Query {
   getAllAlbums: [Album]
   searchAlbum(searchTerm: String): [Album]
   getAlbumById(album: ID): Album
+  getAllAlbumsToReview: [Album]
 }
 
 type Mutation {
   # Add album to database
   addAlbum(album: AlbumInput): Album
-  addAlbumToReview(album: AlbumToReviewInput): Album
+  addAlbumToReview(album: AlbumToReviewInput): Collection
 }

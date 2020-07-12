@@ -12,6 +12,7 @@ input StickerInput {
   number: Int
   title: String
   image: String
+  approvedBy: ID
 }
 
 type Mutation {

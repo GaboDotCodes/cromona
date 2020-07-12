@@ -6,6 +6,7 @@ const searchAlbum = async (searchTerm) => {
     title: {
       $regex: regexSearchTerm,
     },
+    'review.toReview': false,
   });
   return albumsReturn;
 };

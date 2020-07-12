@@ -12,6 +12,7 @@ const addAlbumToReview = require('./functions/addAlbumToReview');
 const addStickersToAlbumToReview = require('./functions/addStickersToAlbumToReview');
 const addCollection = require('./functions/addCollection');
 const addCollectionToUser = require('./functions/addCollectionToUser');
+const getAllAlbumsToReview = require('./functions/getAllAlbumsToReview');
 
 module.exports = {
   Mutation: {
@@ -30,9 +31,9 @@ module.exports = {
     addAlbumToReview: async (_, { album }, context) => {
       try {
         const { authorization } = context.headers;
-        const { startSticker, finishSticker } = album;
         await verifyMatchUserIdAndToken(album.reviewRequestedBy, authorization);
         const albumToReviewReturn = await addAlbumToReview(album);
+        const { startSticker, finishSticker } = album;
         await addStickersToAlbumToReview(startSticker, finishSticker, albumToReviewReturn.id);
         const collection = {
           user: album.reviewRequestedBy,
@@ -40,7 +41,7 @@ module.exports = {
         };
         const collectionSaved = await addCollection(collection);
         await addCollectionToUser(album.reviewRequestedBy, collectionSaved.id);
-        return albumToReviewReturn;
+        return collectionSaved;
       } catch (e) {
         error(e);
         return e;
@@ -70,6 +71,17 @@ module.exports = {
       try {
         const albumReturn = await getAlbumById(album);
         return albumReturn;
+      } catch (e) {
+        error(e);
+        return e;
+      }
+    },
+    getAllAlbumsToReview: async (_, __, context) => {
+      try {
+        const { authorization } = context.headers;
+        await verifyIdTokenAndAdmin(authorization);
+        const albumsToReviewReturn = await getAllAlbumsToReview();
+        return albumsToReviewReturn;
       } catch (e) {
         error(e);
         return e;
