@@ -43,6 +43,7 @@ type Mutation {
   addInterest(interest: InterestInput): Interest
   addSticker(sticker: StickerInput): Sticker
   addUser(user: UserInput): User
+  updateUserLocation(newLocation: location, userId: ID): User
 }
 
 type stickerCollectionDetail {
@@ -152,6 +153,11 @@ type User {
 
 input UserInput {
   uid: String
+}
+
+input location {
+  lon: Float
+  lat: Float
 }
 
 schema {
