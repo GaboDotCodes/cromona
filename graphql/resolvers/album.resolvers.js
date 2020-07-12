@@ -13,6 +13,8 @@ const addStickersToAlbumToReview = require('./functions/addStickersToAlbumToRevi
 const addCollection = require('./functions/addCollection');
 const addCollectionToUser = require('./functions/addCollectionToUser');
 const getAllAlbumsToReview = require('./functions/getAllAlbumsToReview');
+const updateUserLocation = require('./functions/updateUserLocation');
+const getPopularAlbums = require('./functions/getPopularAlbums');
 
 module.exports = {
   Mutation: {
@@ -82,6 +84,26 @@ module.exports = {
         await verifyIdTokenAndAdmin(authorization);
         const albumsToReviewReturn = await getAllAlbumsToReview();
         return albumsToReviewReturn;
+      } catch (e) {
+        error(e);
+        return e;
+      }
+    },
+    getPopularAlbums: async (_, { location, ratio, unit, userId }, context) => {
+      try {
+        const { authorization } = context.headers;
+        let ratioParam = ratio;
+        let unitParam = unit;
+        if (typeof authorization !== 'undefined' && typeof userId !== 'undefined') {
+          await verifyMatchUserIdAndToken(userId, authorization);
+          await updateUserLocation(userId, location);
+        }
+        if (typeof ratio === 'undefined' && typeof unit === 'undefined') {
+          ratioParam = 500;
+          unitParam = 'km';
+        }
+        const albumsReturn = await getPopularAlbums(location, ratioParam, unitParam);
+        return albumsReturn;
       } catch (e) {
         error(e);
         return e;
