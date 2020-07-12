@@ -8,6 +8,7 @@ const getRatingsByUserId = require('./functions/getRatingsByUserId');
 const getSwapsByUserId = require('./functions/getSwapsByUserId');
 const getDisplayName = require('./functions/getDisplayName');
 const getProfilePicture = require('./functions/getProfilePicture');
+const updateUserLocation = require('./functions/updateUserLocation');
 
 module.exports = {
   Mutation: {
@@ -20,6 +21,17 @@ module.exports = {
         }
         const userSaved = await addUser(user);
         return userSaved;
+      } catch (e) {
+        error(e);
+        return e;
+      }
+    },
+    updateUserLocation: async (_, { newLocation, userId }, context) => {
+      try {
+        const { authorization } = context.headers;
+        await verifyMatchUserIdAndToken(userId, authorization);
+        const userReturn = await updateUserLocation(userId, newLocation);
+        return userReturn;
       } catch (e) {
         error(e);
         return e;
