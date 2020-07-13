@@ -1,10 +1,10 @@
-const _ = require('lodash');
+const { range } = require('lodash');
 const Sticker = require('../../../mongodb/schemas/Sticker');
 const Album = require('../../../mongodb/schemas/Album');
 
 const addStickersToAlbumToReview = async (startSticker, finishSticker, album) => {
   const albumObj = await Album.findById(album);
-  const stickersArray = _.range(startSticker, finishSticker + 1);
+  const stickersArray = range(startSticker, finishSticker + 1);
   const stickersPromises = stickersArray.map((number) => {
     const stickerToSave = new Sticker({
       album,
