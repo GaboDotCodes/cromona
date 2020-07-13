@@ -9,6 +9,7 @@ const getSwapsByUserId = require('./functions/getSwapsByUserId');
 const getDisplayName = require('./functions/getDisplayName');
 const getProfilePicture = require('./functions/getProfilePicture');
 const updateUserLocation = require('./functions/updateUserLocation');
+const getPeoplePossibleSwaps = require('./functions/getPeoplePossibleSwaps');
 
 module.exports = {
   Mutation: {
@@ -45,6 +46,18 @@ module.exports = {
         await verifyIdToken(authorization);
         const userReturn = await getUserById(user);
         return userReturn;
+      } catch (e) {
+        error(e);
+        return e;
+      }
+    },
+    getPeoplePossibleSwaps: async (_, { location, ratio, unit, userId }, context) => {
+      try {
+        const { authorization } = context.headers;
+        await verifyMatchUserIdAndToken(userId, authorization);
+        await updateUserLocation(userId, location);
+        const peopleReturn = await getPeoplePossibleSwaps(location, ratio, unit, userId);
+        return peopleReturn;
       } catch (e) {
         error(e);
         return e;
