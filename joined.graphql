@@ -38,6 +38,7 @@ type Query {
   getCollectionById(queryData: getCollectionByIdInput): Collection
   getCollectionsByUserId(userId: ID): [Collection]
   getUserById(user: ID): User
+  getPeoplePossibleSwaps(location: location!, ratio: Int!, unit: distanceUnit!, userId: ID!): [User]
 }
 
 type Mutation {
