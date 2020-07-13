@@ -25,6 +25,7 @@ input location {
 
 type Query {
   getUserById(user: ID): User
+  getPeoplePossibleSwaps(location: location!, ratio: Int!, unit: distanceUnit!, userId: ID!): [User]
 }
 
 type Mutation {
