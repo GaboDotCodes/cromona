@@ -92,17 +92,11 @@ module.exports = {
     getPopularAlbums: async (_, { location, ratio, unit, userId }, context) => {
       try {
         const { authorization } = context.headers;
-        let ratioParam = ratio;
-        let unitParam = unit;
         if (typeof authorization !== 'undefined' && typeof userId !== 'undefined') {
           await verifyMatchUserIdAndToken(userId, authorization);
           await updateUserLocation(userId, location);
         }
-        if (typeof ratio === 'undefined' && typeof unit === 'undefined') {
-          ratioParam = 500;
-          unitParam = 'km';
-        }
-        const albumsReturn = await getPopularAlbums(location, ratioParam, unitParam);
+        const albumsReturn = await getPopularAlbums(location, ratio, unit);
         return albumsReturn;
       } catch (e) {
         error(e);
