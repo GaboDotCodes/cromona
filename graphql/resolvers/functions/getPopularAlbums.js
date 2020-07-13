@@ -31,7 +31,10 @@ const getPopularAlbums = async (location, ratio, unit) => {
       });
     })
     .flat();
-  const allAlbumsNoRepeat = [...new Set(allAlbums)];
+  const allApprovedAlbums = allAlbums.filter((album) => {
+    return album.review.toReview === false;
+  });
+  const allAlbumsNoRepeat = [...new Set(allApprovedAlbums)];
   return allAlbumsNoRepeat;
 };
 
