@@ -1,15 +1,15 @@
 const User = require('../../../mongodb/schemas/User');
+const getConvertionFactors = require('./getConvertionFactors');
 
 const getPopularAlbums = async (location, ratio, unit) => {
   const { lat, lon } = location;
-  let convertionToMt;
-  if (unit === 'mi') {
-    convertionToMt = 1609.34;
-  } else if (unit === 'km') {
-    convertionToMt = 1000;
-  } else {
-    throw new Error('getPopularAlbums: Invalid units');
+  let ratioParam = ratio;
+  let unitParam = unit;
+  if (typeof ratio === 'undefined' && typeof unit === 'undefined') {
+    ratioParam = 500;
+    unitParam = 'km';
   }
+  const { convertionToMt } = getConvertionFactors(unitParam);
   const usersInRatio = await User.find({
     lastLocation: {
       $nearSphere: {
@@ -17,7 +17,7 @@ const getPopularAlbums = async (location, ratio, unit) => {
           type: 'Point',
           coordinates: [lon, lat],
         },
-        $maxDistance: ratio * convertionToMt,
+        $maxDistance: ratioParam * convertionToMt,
       },
     },
   }).populate({
