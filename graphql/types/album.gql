@@ -24,11 +24,17 @@ input AlbumToReviewInput {
   reviewRequestedBy: ID
 }
 
+enum distanceUnit {
+  km
+  mi
+}
+
 type Query {
   getAllAlbums: [Album]
   searchAlbum(searchTerm: String): [Album]
   getAlbumById(album: ID): Album
   getAllAlbumsToReview: [Album]
+  getPopularAlbums(location: location!, ratio: Int, unit: distanceUnit, userId: ID): [Album]
 }
 
 type Mutation {
