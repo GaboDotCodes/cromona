@@ -24,14 +24,21 @@ input AlbumToReviewInput {
   reviewRequestedBy: ID
 }
 
+enum distanceUnit {
+  km
+  mi
+}
+
 type Query {
   getAllAlbums: [Album]
   searchAlbum(searchTerm: String): [Album]
   getAlbumById(album: ID): Album
   getAllAlbumsToReview: [Album]
+  getPopularAlbums(location: location!, ratio: Int, unit: distanceUnit, userId: ID): [Album]
   getCollectionById(queryData: getCollectionByIdInput): Collection
   getCollectionsByUserId(userId: ID): [Collection]
   getUserById(user: ID): User
+  getPeoplePossibleSwaps(location: location!, ratio: Int!, unit: distanceUnit!, userId: ID!): [User]
 }
 
 type Mutation {
@@ -43,6 +50,7 @@ type Mutation {
   addInterest(interest: InterestInput): Interest
   addSticker(sticker: StickerInput): Sticker
   addUser(user: UserInput): User
+  updateUserLocation(newLocation: location, userId: ID): User
 }
 
 type stickerCollectionDetail {
@@ -152,6 +160,11 @@ type User {
 
 input UserInput {
   uid: String
+}
+
+input location {
+  lon: Float
+  lat: Float
 }
 
 schema {

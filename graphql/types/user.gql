@@ -18,10 +18,17 @@ input UserInput {
   uid: String
 }
 
+input location {
+  lon: Float
+  lat: Float
+}
+
 type Query {
   getUserById(user: ID): User
+  getPeoplePossibleSwaps(location: location!, ratio: Int!, unit: distanceUnit!, userId: ID!): [User]
 }
 
 type Mutation {
   addUser(user: UserInput): User
+  updateUserLocation(newLocation: location, userId: ID): User
 }
