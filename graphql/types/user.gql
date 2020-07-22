@@ -11,6 +11,7 @@ type User {
   score: Float #ToCoding
   swapsWithMe: [Swap] #ToCoding #WithToken
   stickersUsefulToMe: [Sticker] #ToCoding #WithToken
+  stickersUsefulToSomeone: [Sticker]
   amountPosibleSwaps: Int #ToCoding #WithToken
 }
 
