@@ -7,7 +7,7 @@ const typeDefs = require('./graphql/typesMerged');
 const resolvers = require('./graphql/resolversMerged');
 const { connect } = require('./mongodb/connect');
 
-const { PORT, DSN_SENTRY, ENV_SENTRY } = process.env;
+const { PORT, DSN_SENTRY, ENV_SENTRY, ENV } = process.env;
 const { log } = console;
 
 const app = express();
@@ -30,7 +30,7 @@ app.use(
   '/gql',
   graphqlHTTP({
     schema,
-    graphiql: true,
+    graphiql: ENV === 'sandbox',
   })
 );
 app.get('/*', (req, res) => {
