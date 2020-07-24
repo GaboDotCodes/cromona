@@ -155,6 +155,7 @@ type User {
   score: Float
   swapsWithMe: [Swap]
   stickersUsefulToMe: [Sticker]
+  stickersUsefulToSomeone: [Sticker]
   amountPosibleSwaps: Int
 }
 

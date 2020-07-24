@@ -1,24 +1,24 @@
 const User = require('../../../mongodb/schemas/User');
 const getConvertionFactors = require('./getConvertionFactors');
+const getMatchStickersToSwap = require('./getMatchStickersToSwap');
 
-const getPeoplePossibleSwaps = async (location, ratio, unit, userId) => {
+const getPeoplePossibleSwaps = async (location, ratio, unit, myId) => {
   const { lat, lon } = location;
   const { convertionToMt } = getConvertionFactors(unit);
-  const me = await User.findById(userId).populate({
+  const meMyCollectionsAndMyAlbums = await User.findById(myId).populate({
     path: 'collections',
     populate: { path: 'album' },
   });
-  const albumsInCollectionsNoToReview = me.collections
+  const myAlbumsNoToReview = meMyCollectionsAndMyAlbums.collections
     .filter((collection) => {
       return collection.album.review.toReview === false;
     })
     .map((collection) => {
       return collection.album.id;
     });
-  const allAlbumsNoRepeat = [...new Set(albumsInCollectionsNoToReview)];
-
-  const usersInRatio = await User.find({
-    _id: { $ne: userId },
+  const allAlbumsNoRepeat = [...new Set(myAlbumsNoToReview)];
+  const usersAroundWithMyAlbums = await User.find({
+    _id: { $ne: myId },
     lastLocation: {
       $nearSphere: {
         $geometry: {
@@ -36,9 +36,18 @@ const getPeoplePossibleSwaps = async (location, ratio, unit, userId) => {
       },
     },
   });
-  const usersIds = usersInRatio.map((user) => user.id);
-  // TO BE CONTINUE
-  return usersInRatio;
+  const usersIds = usersAroundWithMyAlbums.map((user) => user.id);
+
+  const userPromises = await usersIds.map(async (someoneId) => {
+    const userDetail = await getMatchStickersToSwap(myId, someoneId);
+    return userDetail;
+  });
+
+  const userWithPossibleSwapsWithNull = await Promise.all(userPromises);
+
+  const userWithPossibleSwaps = userWithPossibleSwapsWithNull.filter((user) => user !== null);
+
+  return userWithPossibleSwaps;
 };
 
 module.exports = getPeoplePossibleSwaps;
