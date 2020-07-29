@@ -1,6 +1,9 @@
 const { Schema, model } = require('mongoose');
 
 const stickerSchema = new Schema({
+  utmCampaign: {
+    type: String,
+  },
   route: {
     type: String,
     require: true,
