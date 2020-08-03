@@ -19,6 +19,8 @@ const app = express();
 sentry.init({ dsn: `${DSN_SENTRY}`, environment: `${ENV_SENTRY}` });
 app.use(sentry.Handlers.requestHandler());
 
+app.use(express.json());
+
 connect();
 
 admin.initializeApp({
