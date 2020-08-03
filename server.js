@@ -8,8 +8,10 @@ const resolvers = require('./graphql/resolversMerged');
 const { connect } = require('./mongodb/connect');
 
 const registervalidation = require('./api/functions/registervalidation');
+const shortUrl = require('./api/functions/shortUrl');
+const findShortAndClick = require('./api/functions/findShortAndClick');
 
-const { PORT, DSN_SENTRY, ENV_SENTRY, ENV, REDIRECT_URL_ALL } = process.env;
+const { PORT, DSN_SENTRY, ENV_SENTRY, ENV, REDIRECT_URL_ALL, SHORTENER_API_KEY } = process.env;
 const { log, error } = console;
 
 const app = express();
@@ -36,6 +38,33 @@ app.use(
   })
 );
 
+app.post('/shortURL', async (req, res) => {
+  try {
+    const { longUrl, apiKey } = req.query;
+    if (typeof apiKey === 'undefined' || apiKey !== SHORTENER_API_KEY) throw new Error(res.status(401).send('Unauthorized'));
+    if (typeof longUrl === 'undefined') throw new Error(res.status(400).send('Bad request'));
+    const shortUrlReturn = await shortUrl(longUrl);
+    res.json(shortUrlReturn);
+  } catch (e) {
+    if (res.statusCode !== 401 && res.statusCode !== 400) {
+      error(e);
+      res.json(e);
+    }
+  }
+});
+
+app.get('/s/:shortUrl', async (req, res) => {
+  try {
+    const { shortUrl } = req.params;
+    const shortedUrlData = await findShortAndClick(shortUrl);
+    res.redirect(shortedUrlData.longUrl);
+    res.end();
+  } catch (e) {
+    error(e);
+    res.json(e);
+  }
+});
+
 app.get('/JetViveLaAventura', async (req, res) => {
   try {
     const utmCampaign = req.query.utm_campaign;
@@ -50,7 +79,7 @@ app.get('/JetViveLaAventura', async (req, res) => {
   }
 });
 
-app.get('/*', (req, res) => {
+app.get('/', (req, res) => {
   res.redirect(REDIRECT_URL_ALL);
   res.end();
 });
