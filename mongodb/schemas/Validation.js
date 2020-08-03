@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const stickerSchema = new Schema({
+const validationSchema = new Schema({
   utmCampaign: {
     type: String,
   },
@@ -14,4 +14,4 @@ const stickerSchema = new Schema({
   },
 });
 
-module.exports = model('Validation', stickerSchema);
+module.exports = model('Validation', validationSchema);
