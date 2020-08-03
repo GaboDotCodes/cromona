@@ -40,7 +40,8 @@ app.use(
 
 app.post('/shortURL', async (req, res) => {
   try {
-    const { longUrl, apiKey } = req.query;
+    const { apiKey } = req.query;
+    const { longUrl } = req.body;
     if (typeof apiKey === 'undefined' || apiKey !== SHORTENER_API_KEY) throw new Error(res.status(401).send('Unauthorized'));
     if (typeof longUrl === 'undefined') throw new Error(res.status(400).send('Bad request'));
     const shortUrlReturn = await shortUrl(longUrl);
