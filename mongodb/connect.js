@@ -4,7 +4,7 @@ const { MONGO_URI } = process.env;
 const { log, error } = console;
 
 const connect = () => {
-  mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+  mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }, (err) => {
     error(err);
   });
   const db = mongoose.connection;
