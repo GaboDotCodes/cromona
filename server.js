@@ -10,6 +10,8 @@ const { connect } = require('./mongodb/connect');
 const registervalidation = require('./api/functions/registervalidation');
 const shortUrl = require('./api/functions/shortUrl');
 const findShortAndClick = require('./api/functions/findShortAndClick');
+const registerPreview = require('./api/functions/registerPreview');
+const getNamePreview = require('./api/functions/getNamePreview');
 
 const { PORT, DSN_SENTRY, ENV_SENTRY, ENV, REDIRECT_URL_ALL, SHORTENER_API_KEY } = process.env;
 const { log, error } = console;
@@ -39,6 +41,29 @@ app.use(
     graphiql: ENV === 'sandbox',
   })
 );
+
+app.post('/preview', async (req, res) => {
+  try {
+    const { name, contact, referedBy } = req.body;
+    const registeredPreview = await registerPreview(name, contact, referedBy);
+    res.json(registeredPreview);
+  } catch (e) {
+    error(e);
+    res.json(e);
+  }
+});
+
+app.get('/preview/:uid', async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const name = await getNamePreview(uid);
+    res.json({ name });
+  } catch (e) {
+    error(e);
+    res.json(e);
+  }
+  
+})
 
 app.post('/shortURL', async (req, res) => {
   try {
