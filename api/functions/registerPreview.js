@@ -8,7 +8,7 @@ const registerPreview = async (name, contact, referedBy) => {
     }
 
     const registered = await Preview.findOne({ contact } )
-    if (registered) throw 'Ya estás registrado';
+    if (registered) return registered;
 
     const registeredPreview = await Preview.create({ name, contact , referedBy });
     return registeredPreview;
