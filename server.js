@@ -3,6 +3,8 @@ const graphqlHTTP = require('express-graphql');
 const { makeExecutableSchema } = require('graphql-tools');
 const sentry = require('@sentry/node');
 const admin = require('firebase-admin');
+const fs = require('fs');
+const path = require('path');
 const typeDefs = require('./graphql/typesMerged');
 const resolvers = require('./graphql/resolversMerged');
 const { connect } = require('./mongodb/connect');
@@ -50,6 +52,18 @@ app.use(
     graphiql: ENV === 'sandbox',
   })
 );
+
+app.use( express.static(path.resolve(__dirname, 'build')) )
+
+app.get('/p/:hostUid*?', (_req, res) => {
+  fs.readFile(path.resolve('./build/index.html'), 'utf-8', (err, data) => {
+      if (err) {
+          console.log(err);
+          return res.status(500).send('Some error happened');
+      }
+      return res.send(data);
+  });
+});
 
 app.post('/preview', async (req, res) => {
   try {
