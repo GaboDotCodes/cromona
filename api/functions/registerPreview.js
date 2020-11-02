@@ -3,7 +3,11 @@ const Preview = require('../../mongodb/schemas/Preview');
 const registerPreview = async (name, contact, referedBy) => {
     if (referedBy) {
         const registeredPreview = await Preview.findOne({ uid: referedBy });
-        if (!registeredPreview) throw 'No hay nadie registrado con esa referencia'
+        if (!registeredPreview) {
+            const registeredPreview = await Preview.create({ name, contact });
+            const { name: newName, uid } = registeredPreview;
+            return { name: newName, uid };
+        }
         if ( registeredPreview.contact === contact ) throw 'No te puedes referir a ti mismo'
     }
 
