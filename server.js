@@ -55,14 +55,23 @@ app.use(
 
 app.use( express.static(path.resolve(__dirname, 'build')) )
 
-app.get('/p/:hostUid*?', (_req, res) => {
-  fs.readFile(path.resolve('./build/index.html'), 'utf-8', (err, data) => {
-      if (err) {
-          console.log(err);
-          return res.status(500).send('Some error happened');
-      }
-      return res.send(data);
-  });
+app.get('/p/:hostUid*?', async (req, res) => {
+  try {
+    const { hostUid } = req.params;
+    const obj = await getNamePreview(hostUid)
+    console.log(obj);
+    fs.readFile(path.resolve('./build/index.html'), 'utf-8', (err, data) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send('Some error happened');
+        }
+        return res.send(data);
+    });
+  } catch (e) {
+    error(e);
+    res.redirect('/');
+    res.end();
+  }
 });
 
 app.post('/preview', async (req, res) => {
